@@ -5,6 +5,8 @@ import pandas as pd
 import plotly.io as pio
 pio.templates.default = "none"
 
+import matplotlib.pyplot as plt
+
 def plot_timeseries(data, labels, title='', xlabel='', ylabel='',
                     shapes=None, hoverformat = '.2f',
                     mode='lines+markers',
@@ -38,3 +40,12 @@ def plot_timeseries(data, labels, title='', xlabel='', ylabel='',
 
     fig = go.Figure(data=data, layout=layout)
     fig.show()
+    
+    
+def py_histo(inputs=[], labels=[], bins=None, normed=True, xlabel='', title=''):
+    fig, axis = plt.subplots(1,figsize=(8,4))
+    for i, x in enumerate(inputs):
+        content = axis.hist(x, bins=bins, density=normed, alpha=0.5, label = labels[i])
+    axis.legend(loc='best')
+    tmp = axis.set_xlabel(xlabel)
+    axis.set_title(title)
